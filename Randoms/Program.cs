@@ -6,8 +6,8 @@ namespace Randoms
 {
     class Program
     {
-        static Random random = new Random();
-        static RNGCryptoServiceProvider rng = new RNGCryptoServiceProvider();
+        static Random random = new Random(1);
+        static RNGCryptoServiceProvider rngCryptoServiceProvider = new RNGCryptoServiceProvider();
 
         static void Main(string[] args)
         {
@@ -36,7 +36,7 @@ namespace Randoms
 
             Console.WriteLine(stopwatch.ElapsedMilliseconds);
             Console.WriteLine("------");
-
+            
             Encrypter encrypter = new Encrypter(5,true);
 
             string obsucatedString = encrypter.Encrypt("Hello world");
@@ -48,15 +48,24 @@ namespace Randoms
         }
 
 
+        /// <summary>
+        /// Using the RNGCryptoServiceProvider generates a random number.
+        /// </summary>
+        /// <param name="size">Amount of bytes to generate</param>
+        /// <returns>Filled byte array with random bytes</returns>
         static byte[] GenerateSecureRandomValue(int size)
         {
             byte[] data = new byte[size];
-          
-            rng.GetBytes(data);
+
+            rngCryptoServiceProvider.GetBytes(data);
             return data; 
 
         }
 
+        /// <summary>
+        /// Using the Random class to generate a random number
+        /// </summary>
+        /// <returns>a psudorandrom number</returns>
         static int GenerateRandomValue()
         {
             return random.Next(int.MinValue, int.MaxValue);
