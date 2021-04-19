@@ -12,7 +12,6 @@ namespace Randoms
         static void Main(string[] args)
         {
             Stopwatch stopwatch = new Stopwatch();
-            
 
             stopwatch.Start();
             for (int i = 0; i < 10; i++)
@@ -38,11 +37,14 @@ namespace Randoms
             Console.WriteLine(stopwatch.ElapsedMilliseconds);
             Console.WriteLine("------");
 
+            Encrypter encrypter = new Encrypter(5,true);
 
+            string obsucatedString = encrypter.Encrypt("Hello world");
+            Console.WriteLine(obsucatedString);
 
+            encrypter.Decrypt(obsucatedString);
 
-
-            Console.WriteLine("Hello World!");
+            Console.WriteLine(encrypter.Decrypt(obsucatedString));
         }
 
 
